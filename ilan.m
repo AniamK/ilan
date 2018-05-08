@@ -121,13 +121,23 @@ else % else aa_chb uncheck
 end
 
 if(get(handles.aa_chb,'Value')==0)
-    imageNormalize = normalization(imageData,center(2),center(1),radius,ci(1),ci(2),ci(3));
+    %[ring,parr]=normaliseiris(imageData,ci(1),ci(2),ci(3),center(1),center(2),radius,'normal.bmp',100,300);
+    [ring,parr]=normaliseiris(imageData,ci(2),ci(1),ci(3),center(1),center(2),radius,'normal.bmp',100,300);
+    parr=adapthisteq(parr);
     axes(handles.axes3);
-    imshow(imageNormalize);
+    imshow(parr);
+    
+    parr = imresize(parr,[227 227]); % resize
+    imageNormalize = cat(3, parr, parr, parr); % convert 2d image to 3d image
 else
-    imageNormalize = normalization(imageData,cp(1),cp(2),cp(3),ci(1),ci(2),ci(3));
+    %[ring,parr]=normaliseiris(imageData,ci(1),ci(2),ci(3),center(1),center(2),radius,'normal.bmp',100,300);
+    [ring,parr]=normaliseiris(imageData,ci(2),ci(1),ci(3),center(1),center(2),radius,'normal.bmp',100,300);
+    parr=adapthisteq(parr);
     axes(handles.axes3);
-    imshow(imageNormalize);
+    imshow(parr);
+    
+    parr = imresize(parr,[227 227]); % resize
+    imageNormalize = cat(3, parr, parr, parr); % convert 2d image to 3d image
 end
 
 setappdata(handles.axes3,'imageNormalize',imageNormalize);
