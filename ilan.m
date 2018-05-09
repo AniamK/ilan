@@ -105,7 +105,7 @@ if(get(handles.aa_chb,'Value')==0)
 else % else aa_chb uncheck
     axes(handles.axes2);
     imshow(imageData);
-    [ci,cp,out] = thresh(imageData,110,160);
+    [ci,cp,out] = thresh(imageData,100,150);
     ci = round(ci,0);
     cp = round(cp,0);
     
@@ -131,7 +131,7 @@ if(get(handles.aa_chb,'Value')==0)
     imageNormalize = cat(3, parr, parr, parr); % convert 2d image to 3d image
 else
     %[ring,parr]=normaliseiris(imageData,ci(1),ci(2),ci(3),center(1),center(2),radius,'normal.bmp',100,300);
-    [ring,parr]=normaliseiris(imageData,ci(2),ci(1),ci(3),center(1),center(2),radius,'normal.bmp',100,300);
+    [ring,parr]=normaliseiris(imageData,ci(2),ci(1),ci(3),cp(2),cp(1),cp(3),'normal.bmp',100,300);
     parr=adapthisteq(parr);
     axes(handles.axes3);
     imshow(parr);
